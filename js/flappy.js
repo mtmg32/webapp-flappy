@@ -1,5 +1,7 @@
 var player;
 
+var sprite;
+
 var pipes = [];
 
 // the Game object used by the phaser.io library
@@ -34,6 +36,9 @@ function preload() {
 
 function create() {
 
+  game.physics.startSystem(Phaser.Physics.ARCADE);
+
+
 var pipeInterval = 1.75 * Phaser.Timer.SECOND;
 game.time.events.loop(
   pipeInterval,
@@ -50,21 +55,20 @@ game.stage.setBackgroundColor("#00cccc");
 
 game.add.text(280, 40, "Flappy Frog", {font: "60px Times", fill: "#00cc00"});
 
-game.add.sprite(5, 370, "playerImg");
-game.add.sprite(670, 370, "playerImg");
-game.add.sprite(10, 70, "playerImg");
-game.add.sprite(670, 70, "playerImg");
+//game.add.sprite(5, 370, "playerImg");
+//game.add.sprite(670, 370, "playerImg");
+//game.add.sprite(10, 70, "playerImg");
+//game.add.sprite(670, 70, "playerImg");
 
-game.input.onDown.add(clickHandler);
+//game.input.onDown.add(clickHandler);
 game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(spaceHandler);
     // set the background colour of the scene
 labelScore = game.add.text(20, 20, "0");
 
 player = game.add.sprite(100, 200, "playerImg");
-game.physics.startSystem(Phaser.Physics.ARCADE);
 game.physics.arcade.enable(player);
-player.body.velocity.y = 25;
-player.body.gravity.y = 500;
+///player.body.velocity.y = 25;
+///player.body.gravity.y = 500;
 }
 
 /*
@@ -86,6 +90,10 @@ function addPipeBlock(x, y) {
   }
 
 function update() {
+
+          //  400 is the speed it will move towards the mouse
+          game.physics.arcade.moveToPointer(player, 400);
+
 
 }
 
